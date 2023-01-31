@@ -1,0 +1,196 @@
+var Manifold = window.Manifold || {};
+
+Manifold.navigationWidget = (function() {
+  var api = {};
+  var endpoint = '/api/tallus';
+  var _opts = {
+    baseURL: '//marvel.com',
+    includeNavFtr: true,
+    includeNavTop: true,
+    enableOneIdModal: false,
+    shouldLoadJS: true,
+    shouldLoadCSS: true,
+
+    selectors: {
+      navTop: '#navigation-container-nav-top',
+      navFtr: '#navigation-container-nav-ftr',
+    },
+
+    options: null, // used to populate _qs
+  };
+  var _qs = {
+    // Populated from _opts
+    include_nav_ftr: null,
+    include_nav_top: null,
+    enable_one_id_modal: false,
+
+    nav_top_include_search: true,
+    nav_ftr_include_search: true,
+
+    // No Default
+    // home_url: null,
+    // nav_ftr_custom_terms: null,
+    // sign_in_url: null,
+    // use_oauth_host: null,
+    // state: null,
+    // client_id: null,
+    // referer: null,
+  };
+
+  api.settings = _qs;
+
+  var url;
+  var jsURL;
+  var styleCSS;
+
+  /**
+   * Makes the API GET request to the endpoint to retrieve the Nav and/or footer with the supplies
+   * options
+   * @param  {Object} options Configurable options allowed by 3rd party vendors
+   */
+  var load = (api.load = function(options) {
+    if (options && options.baseURL) {
+      for (var key in options) {
+        _opts[key] = options[key];
+      }
+
+      if (_opts.enableOneIdModal) {
+        _qs.enable_one_id_modal = _opts.enableOneIdModal;
+      }
+
+      if (!_qs.referer) {
+        _qs.referer = window.location.href;
+      }
+
+      if (_opts.includeNavFtr || _opts.includeNavTop) {
+        _qs.include_nav_ftr = _opts.includeNavFtr;
+        _qs.include_nav_top = _opts.includeNavTop;
+
+        if (_opts.settings) {
+          for (var opt in _opts.settings) {
+            _qs[opt] = _opts.settings[opt];
+          }
+        }
+
+        if (_opts.selectors) {
+          _qs.selectors = _opts.selectors;
+        }
+
+        url = _opts.baseURL + endpoint;
+        url = _appendQueryStrings(url, _qs);
+
+        _loadEndpoint(url, _onEndPointLoad);
+      }
+    }
+  });
+
+  /**
+   * Makes the API request after appending a JSONP callback function
+   * @param  {string} url The request Url
+   * @param  {Function} callback onSuccess callback
+   */
+  function _loadEndpoint(url, callback) {
+    fetch(url)
+      .then(function(res) {
+        return res.json();
+      })
+      .then(function(res) {
+        if (res.error) {
+          return new Error('Tallus API responded with an Error. ' + JSON.stringify(res.error));
+        }
+
+        callback(res);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  /**
+   * Take the styles from the API and add them to the page
+   */
+  function _loadCSS() {
+    if (_opts.shouldLoadCSS) {
+      //Adding styles directly to the page.
+      var css = document.createElement('style');
+      css.type = 'text/css';
+
+      if (css.styleSheet) {
+        css.styleSheet.cssText = styleCSS;
+      } else {
+        css.appendChild(document.createTextNode(styleCSS));
+      }
+      document.getElementsByTagName('head')[0].appendChild(css);
+    }
+  }
+
+  /**
+   * Take the JS file retuned from the API request and load it into the page.
+   */
+  function _loadJS() {
+    var asset;
+    if (_opts.shouldLoadJS) {
+      asset = document.createElement('script');
+      asset.type = 'text/javascript';
+      asset.src = _opts.baseURL + jsURL;
+
+      document.getElementsByTagName('head')[0].appendChild(asset);
+    }
+  }
+
+  /**
+   * Append the supplied options to the request url
+   * @param  {string} url The api request url
+   * @param  {object} qsObj The options to add to the query string
+   * @return {string} the Full API request Url
+   */
+  function _appendQueryStrings(url, qsObj) {
+    url += '?';
+    var first = true;
+    for (var key in qsObj) {
+      key = _fixedEncodeURIComponent(key);
+      var value = _fixedEncodeURIComponent(qsObj[key]);
+      if (!first) {
+        url += '&';
+      }
+      url += key + '=' + value;
+      first = false;
+    }
+    return url;
+  }
+
+  /**
+   * Encode url value
+   * @param  {string|object} value The option to encode
+   * @return {string} encoded option
+   */
+  function _fixedEncodeURIComponent(value) {
+    var type = typeof value;
+    if (type === 'function' || type === 'object') {
+      value = JSON.stringify(value);
+    }
+    return encodeURIComponent(value).replace(/[!'()*]/g, function(c) {
+      return '%' + c.charCodeAt(0).toString(16);
+    });
+  }
+
+  /**
+   * onSuccess Callback for the API request. Kicks off the appending and loading of all needed files
+   * and HTML.
+   * @param  {Object} response API Response
+   */
+  function _onEndPointLoad(response) {
+    api.response = response;
+    jsURL = response.js_script;
+    styleCSS = response.styles;
+
+    _loadCSS();
+    _loadJS();
+  }
+
+  if (window.onMarvelNavigationWidget) {
+    window.onMarvelNavigationWidget(api);
+  }
+
+  return api;
+})();
