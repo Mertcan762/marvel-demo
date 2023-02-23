@@ -7,7 +7,7 @@
 }
 
 body{
-    background:whitesmoke ;
+    background: black ;
 }
 
 section{
@@ -43,107 +43,128 @@ header{
 }
 
 header .logo{
+    position: absolute;
+    bottom: 0;
     text-align: center;
     max-width: 70px;
 }
 
-.content{
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1;
-}
-
-.content .textBox{
-    position: relative;
-    max-width: 700;
-}
-
-.content .textBox h2{
-    font-size: 2em;
-    line-height: 1.4em;
-    font-weight: 600;
-    word-spacing: 20px;
-}
-
-content .textBox h2 span{
-    text-transform: uppercase;
-    font-size: 2.3em;
-    font-weight: 900;
-}
-
-content .textBox p{
-    position: absolute;
-    top: 50px;
-    font-size: 15px;
-    word-spacing: 5px;
-    line-height: 25px;
-}
-
- img .hero{
-    position: absolute;
-    height: 400px;
-    align-items: center;
-    width: 350px;
-    border-radius: 3px;
-}
-
 .container{
-    display: flex;
+    display: inline-block;
 }
 
 .card{
-    height: 500px;
-    margin: 50px;
-    box-shadow: 5px 5px 20px black;
-    overflow: hidden;
-}
-
-.intro{
-    height: 0;
+    opacity: 0.8;
     width: 350px;
-    padding: 6px;
-    box-sizing: border-box;
-    position: absolute;
-    bottom: 0;
-    background: rgb(40, 40, 40 .5);
+    background-size:  200px 100px;
+    display: inline-block;
+    background-color:  gray;
     color: #fff;
-    transition: .5s;
-}
-
-h1{
+    position: relative;
     margin: 10px;
-    font-size: 40px;
-}
-
-p{
-    font-size: 20px;
-    margin: 20px;
-    visibility: hidden;
-    opacity: 0;
-}
-
-span{
-    font-weight: bold;
+    padding: 10px;
 }
 
 .card:hover{
+    opacity: 1;
     cursor: pointer;
 }
 
-/* .card:hover .intro{
-    height: 220px;
-    bottom: 240px;
-    background: black;
-} */
-
-.card:hover p{
-    opacity: 1;
-    visibility: visible;
+.card img{
+    width: 200px ;
+    height: 200px;
+    margin: 70px;
+    margin-top: 10px;
 }
 
-/* .card:hover .hero{
-    transform: scale(1.1) rotate(-3deg);
-} */
+.card .title{
+    text-align: center;
+    padding: 1rem;
+    font-size: 17px;
+}
+
+ h1{
+    text-align: center;
+    margin: 20px;
+    font-size: 15px;
+}
+
+h2{
+    font-size: 15px;
+    text-align: center;
+    margin: 15px;
+}
+
+#daire1{
+    text-align: center;
+    border: 2px solid;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    top: 95px;
+    left: 5px;
+    float: left;
+}
+
+#daire2{
+    text-align: center;
+    border: 2px solid;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    top: 160px;
+    left: 5px;
+    float: left;
+}
+
+#daire3{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 2px solid;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    top: 30px;
+    left: 5px;
+    float: left;
+}
+
+#daire1:hover{
+    padding: 15px;
+    background-color: #42a5f5;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+#daire2:hover{
+    padding: 15px;
+    background-color: red;
+    cursor: pointer;
+    transition: 0.4s;
+
+}
+
+#daire3:hover{
+    padding: 15px;
+    background-color: greenyellow;
+    cursor: pointer;
+    transition: 0.4s;
+
+}
+
+
+
+p{
+    font-size: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+.card:hover .hero{
+    transition: 0.5s;
+    transform: scale(1.1)
+}
