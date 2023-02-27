@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(err => console.log(err));
   };
   const getEvents = () => {
-    fetch(`${marvelApiUrl}${}`)
+    fetch(`${marvelApiUrl}`)
   }
   const createCard = (hero) => {
     const series = `${hero.series.available}`;
