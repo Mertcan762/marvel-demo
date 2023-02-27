@@ -8,6 +8,9 @@ const marvelEndpoints = {
   characters: {
     list: '/v1/public/characters',
     detail: '/v1/public/characters/{characterId}'
+  },
+  events: {
+    list:"/v1/public/events"
   }
 };
 
@@ -38,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(err => console.log(err));
   };
-
+  const getEvents = () => {
+    fetch(`${marvelApiUrl}`)
+  }
   const createCard = (hero) => {
     const series = `${hero.series.available}`;
     const stories = `${hero.stories.available}`;
