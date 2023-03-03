@@ -10,7 +10,10 @@ body {
   }
   
   .hero {
-    padding-left: 200px;
+    padding: 10px;
+    border-radius: 80px;
+    position: absolute;
+    left: 200px;
     width: 100%;
     max-width: 400px;
   }
@@ -20,7 +23,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 70px;
     text-align: center;
   }
   
@@ -44,15 +47,22 @@ body {
   }
   
   #daire1 {
+    cursor: pointer;
     color: #ef5350;
   }
   
   #daire2 {
+    cursor: pointer;
     color: #42a5f5;
   }
   
   #daire3 {
+    cursor: pointer;
     color: #66bb6a;
+  }
+
+  #daire4 {
+    cursor: pointer;
   }
   
   .back-btn {

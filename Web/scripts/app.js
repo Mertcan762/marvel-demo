@@ -20,7 +20,7 @@ const template = (src, name, id, modified, available, stories, series) => `
     <div class="intro">
       <h1>${name}</h1>
       <h2>${id}</h2>
-      <h2>${modified}</h3>
+      <h2>${modified}</h2>
       <span title="stories" id ="daire2">${stories}</span>
       <span title="series" id = "daire3">${series}</span>
       <span title="comics" id ="daire1">${available}</span>    

@@ -22,10 +22,12 @@ const template = (src, name, id, description, modified, comics, events, series, 
       <h2>${id}</h2>
       <p>${description}</p>
       <h3>Last modified: ${modified}</h3>
-      <span id ="daire1">${comics}</span>    
-      <span id ="daire2">${events}</span>
-      <span id ="daire3">${series}</span>
-      <span id ="daire4">${stories}</span>
+      <div class="details">
+        <span id ="daire1">${comics}</span>    
+        <span id ="daire2">${events}</span>
+        <span id ="daire3">${series}</span>
+        <span id ="daire4">${stories}</span>
+      </div>
     </div>
   </div>
 `;
@@ -54,6 +56,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const src = `${character.thumbnail.path}.${character.thumbnail.extension}`;
     const characterCard = template(src, character.name, character.id, character.description, date.toLocaleDateString(), comics, events, series, stories);
     container.innerHTML = characterCard;
+
+    const daire1 = document.getElementById("daire1");
+    daire1.addEventListener("click", function () {
+      window.location.href = `comics.html?characterId=${characterId}`;
+    });
+
+    const daire2 = document.getElementById("daire2");
+    daire2.addEventListener("click", function () {
+      window.location.href = `events.html?characterId=${characterId}`;
+    });
+
+    const daire3 = document.getElementById("daire3");
+    daire3.addEventListener("click", function () {
+      window.location.href = `series.html?characterId=${characterId}`;
+    });
+
+    const daire4 = document.getElementById("daire4");
+    daire4.addEventListener("click", function () {
+      window.location.href = `stories.html?characterId=${characterId}`;
+    });
   };
 
   getCharacter();

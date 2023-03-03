@@ -50,27 +50,33 @@ header .logo{
 }
 
 .container{
+    padding: 100px;
     display: inline-block;
 }
 
 .card{
+    border-radius: 10px;
     opacity: 0.8;
-    width: 350px;
+    height: 380px;
+    width: 300px;
     background-size:  200px 100px;
     display: inline-block;
     background-color:  gray;
     color: #fff;
     position: relative;
-    margin: 10px;
+    margin: 30px;
     padding: 10px;
 }
 
 .card:hover{
+    transition: 0.5s;
+    transform: scale(1.1);
     opacity: 1;
     cursor: pointer;
 }
 
 .card img{
+    border-radius: 10px;
     width: 200px ;
     height: 200px;
     margin: 70px;
@@ -79,20 +85,20 @@ header .logo{
 
 .card .title{
     text-align: center;
-    padding: 1rem;
-    font-size: 17px;
+    font-size: 10px;
 }
 
  h1{
     text-align: center;
-    margin: 20px;
+    margin: 10px;
     font-size: 15px;
 }
 
 h2{
+    bottom: 15px;
     font-size: 15px;
     text-align: center;
-    margin: 15px;
+    margin: 5px;
 }
 
 #daire1{
