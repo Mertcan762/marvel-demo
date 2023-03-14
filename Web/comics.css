@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+
+    background: black ;
+}
+
+#comicCardsContainer{
+    padding: 50px;
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    overflow: unset;
+    border-radius: 10px;
+    opacity: 0.8;
+    width: 300px;
+    background-size:  200px 100px;
+    display: block;
+    background-color:  gray;
+    color: #fff;
+    position: relative;
+    margin: 30px;
+}
+
+.card:hover{
+    transition: 0.5s;
+    transform: scale(1.1);
+    opacity: 1;
+    cursor: pointer;
+}
+
+.card img{
+    border-radius: 10px;
+    width: 200px ;
+    height: 200px;
+    margin: 50px;
+    margin-top: 10px;
+}
+
+h1{
+    font-size: 20px;
+    text-align: center;
+}
+
+h3{
+    margin: 10px;
+    text-align: left;
+}
+
+p{
+    margin: 5px;
+}
+
+ul li{
+    list-style-type: none;
+    margin: 5px;
+    text-align: start;
+}
